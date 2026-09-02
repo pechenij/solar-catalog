@@ -553,13 +553,13 @@
 
     // Firebase config (replace with your actual config)
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+  apiKey: "AIzaSyDqsPyFsC-x8KwVl5Wazoy6VFVMIJNj2UA",
+  authDomain: "komputerra-solar.firebaseapp.com",
+  projectId: "komputerra-solar",
+  storageBucket: "komputerra-solar.firebasestorage.app",
+  messagingSenderId: "515900500199",
+  appId: "1:515900500199:web:3f0ebb0a674cf2025e9a42"
+};
 
     let app, auth, db;
     let ordersData = [];
@@ -579,20 +579,29 @@
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
       const errorEl = document.getElementById('loginError');
+      errorEl.style.display = 'none';
 
-      try {
-        if (auth) {
+      // Спочатку перевіряємо demo-режим
+      if (email === 'admin@komputerra.ua' && password === 'admin123') {
+        console.log('Demo mode login');
+        showDashboard(email);
+        loadDemoOrders();
+        return;
+      }
+
+      // Якщо не demo, пробуємо Firebase
+      if (auth) {
+        try {
           await signInWithEmailAndPassword(auth, email, password);
-        } else {
-          // Demo mode
-          if (email === 'admin@komputerra.ua' && password === 'admin123') {
-            showDashboard(email);
-            loadDemoOrders();
-          } else {
-            errorEl.style.display = 'block';
-          }
+          console.log('Firebase login successful');
+        } catch (error) {
+          console.error('Firebase login error:', error);
+          errorEl.textContent = 'Невірний email або пароль';
+          errorEl.style.display = 'block';
         }
-      } catch (error) {
+      } else {
+        // Firebase не налаштований і не demo
+        errorEl.textContent = 'Невірний email або пароль';
         errorEl.style.display = 'block';
       }
     };
