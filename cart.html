@@ -550,13 +550,13 @@
 
     // Firebase config (will be replaced with actual config)
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+  apiKey: "AIzaSyDqsPyFsC-x8KwVl5Wazoy6VFVMIJNj2UA",
+  authDomain: "komputerra-solar.firebaseapp.com",
+  projectId: "komputerra-solar",
+  storageBucket: "komputerra-solar.firebasestorage.app",
+  messagingSenderId: "515900500199",
+  appId: "1:515900500199:web:3f0ebb0a674cf2025e9a42"
+};
 
     let app, db;
     try {
@@ -656,31 +656,41 @@
         return;
       }
 
+      const orderNumber = 'ORD-' + Date.now();
       const orderData = {
-        orderNumber: 'ORD-' + Date.now(),
+        orderNumber: orderNumber,
         customer: { name, surname, phone, email },
         delivery: { city, address },
         comment,
         items: cart,
         total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
         status: 'new',
-        createdAt: serverTimestamp()
+        createdAt: new Date().toISOString()
       };
 
       try {
         if (window.firebaseDb) {
+          // Для Firebase використовуємо serverTimestamp
+          orderData.createdAt = serverTimestamp();
           await addDoc(collection(window.firebaseDb, 'orders'), orderData);
+          console.log('Order saved to Firebase');
+        } else {
+          console.log('Demo mode: order saved locally');
         }
 
-        document.getElementById('orderNumber').textContent = orderData.orderNumber;
+        // Показуємо модальне вікно успіху
+        document.getElementById('orderNumber').textContent = orderNumber;
         document.getElementById('successModal').classList.add('active');
+
+        // Очищуємо кошик
         localStorage.removeItem('cart');
         cart = [];
+
+        // Оновлюємо відображення
+        renderCart();
       } catch (error) {
-        console.error('Error:', error);
-        alert('Замовлення оформлено (локально). Firebase не налаштовано.');
-        localStorage.removeItem('cart');
-        window.location.href = 'index.html';
+        console.error('Error submitting order:', error);
+        alert('Виникла помилка при оформленні замовлення. Спробуйте ще раз або зв\'яжіться з нами за телефоном.');
       }
     };
 
