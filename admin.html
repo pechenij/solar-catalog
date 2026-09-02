@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмін-панель — КОМПУТЕРРА</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-alt: #f0f4f8;
+      --text: #1a2332;
+      --text-secondary: #5a6a7e;
+      --text-muted: #8896a6;
+      --border: #e2e8f0;
+      --border-light: #edf2f7;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Login Screen */
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #1a2332 0%, #0f172a 100%);
+    }
+
+    .login-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 48px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .login-logo img {
+      height: 64px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .login-title {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xs);
+      font-size: 14px;
+      font-family: inherit;
+      transition: var(--transition);
+      background: var(--surface);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: white;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* Dashboard */
+    .dashboard {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .dashboard.active { display: block; }
+
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-light);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo img {
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .user-info {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .btn-logout {
+      padding: 8px 16px;
+      background: var(--surface-alt);
+      border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: var(--radius-xs);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-logout:hover {
+      background: var(--border-light);
+      color: var(--text);
+    }
+
+    .main-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.new { background: #dbeafe; color: #3b82f6; }
+    .stat-icon.processing { background: #fef3c7; color: #f59e0b; }
+    .stat-icon.completed { background: #d1fae5; color: #10b981; }
+    .stat-icon.total { background: #e0e7ff; color: #6366f1; }
+
+    .stat-info h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-info p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .orders-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .orders-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .order-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .order-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--border);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .order-number {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .order-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-new { background: #dbeafe; color: #1e40af; }
+    .status-processing { background: #fef3c7; color: #92400e; }
+    .status-completed { background: #d1fae5; color: #065f46; }
+    .status-cancelled { background: #fee2e2; color: #991b1b; }
+
+    .order-customer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-xs);
+    }
+
+    .customer-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .customer-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .customer-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .order-items {
+      margin-bottom: 20px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .order-item:last-child { border-bottom: none; }
+
+    .item-name {
+      font-size: 14px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .item-qty {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 12px;
+    }
+
+    .item-price {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 2px solid var(--border);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .order-total .price {
+      color: var(--accent);
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      border: none;
+      border-radius: var(--radius-xs);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-success { background: var(--success); color: white; }
+    .btn-warning { background: var(--warning); color: white; }
+    .btn-danger { background: var(--error); color: white; }
+
+    .btn-sm:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .order-customer { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .orders-header { flex-direction: column; align-items: stretch; }
+      .filters { overflow-x: auto; flex-wrap: nowrap; }
+      .order-header { flex-direction: column; }
+      .order-actions { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div class="login-container" id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="images/logo.jpg" alt="КОМПУТЕРРА">
+      </div>
+      <h2 class="login-title">Адмін-панель</h2>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="loginEmail" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Пароль</label>
+          <input type="password" class="form-input" id="loginPassword" required autocomplete="current-password">
+        </div>
+        <div class="error-message" id="loginError">Невірний email або пароль</div>
+        <button type="submit" class="btn btn-primary">Увійти</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-inner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <img src="images/logo.jpg" alt="КОМПУТЕРРА" class="header-logo">
+          <h1 class="header-title">Панель управління</h1>
+        </div>
+        <div class="header-actions">
+          <span class="user-info" id="userEmail"></span>
+          <button class="btn-logout" onclick="handleLogout()">Вийти</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon new">📋</div>
+          <div class="stat-info">
+            <h3 id="statNew">0</h3>
+            <p>Нові замовлення</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon processing">⚙️</div>
+          <div class="stat-info">
+            <h3 id="statProcessing">0</h3>
+            <p>В обробці</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon completed">✅</div>
+          <div class="stat-info">
+            <h3 id="statCompleted">0</h3>
+            <p>Виконано</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon total">📊</div>
+          <div class="stat-info">
+            <h3 id="statTotal">0</h3>
+            <p>Всього замовлень</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      <div class="orders-header">
+        <h2 class="orders-title">Замовлення</h2>
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterOrders('all')">Всі</button>
+          <button class="filter-btn" onclick="filterOrders('new')">Нові</button>
+          <button class="filter-btn" onclick="filterOrders('processing')">В обробці</button>
+          <button class="filter-btn" onclick="filterOrders('completed')">Виконано</button>
+        </div>
+      </div>
+
+      <div class="orders-list" id="ordersList">
+        <!-- Orders will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // Firebase config (replace with your actual config)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    let app, auth, db;
+    let ordersData = [];
+    let currentFilter = 'all';
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+    } catch (error) {
+      console.log('Firebase not configured');
+    }
+
+    // Login
+    window.handleLogin = async function(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const errorEl = document.getElementById('loginError');
+
+      try {
+        if (auth) {
+          await signInWithEmailAndPassword(auth, email, password);
+        } else {
+          // Demo mode
+          if (email === 'admin@komputerra.ua' && password === 'admin123') {
+            showDashboard(email);
+            loadDemoOrders();
+          } else {
+            errorEl.style.display = 'block';
+          }
+        }
+      } catch (error) {
+        errorEl.style.display = 'block';
+      }
+    };
+
+    // Logout
+    window.handleLogout = async function() {
+      if (auth) {
+        await signOut(auth);
+      }
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('dashboard').classList.remove('active');
+    };
+
+    // Show Dashboard
+    function showDashboard(email) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      document.getElementById('userEmail').textContent = email;
+    }
+
+    // Auth State
+    if (auth) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          showDashboard(user.email);
+          loadOrders();
+        }
+      });
+    }
+
+    // Load Orders from Firebase
+    function loadOrders() {
+      if (!db) return;
+
+      const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'));
+      onSnapshot(q, (snapshot) => {
+        ordersData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        renderOrders();
+        updateStats();
+      });
+    }
+
+    // Demo Orders
+    function loadDemoOrders() {
+      ordersData = [
+        {
+          id: '1',
+          orderNumber: 'ORD-1725274800000',
+          customer: { name: 'Іван', surname: 'Петренко', phone: '+380501234567', email: 'ivan@example.com' },
+          delivery: { city: 'Київ', address: 'Відділення №5' },
+          comment: 'Дзвоніть після 18:00',
+          items: [
+            { name: 'Інвертор гібридний LuxPower SNA6000', brand: 'LuxPower', price: 26000, quantity: 1, emoji: '⚡' }
+          ],
+          total: 26000,
+          status: 'new',
+          createdAt: new Date()
+        }
+      ];
+      renderOrders();
+      updateStats();
+    }
+
+    // Render Orders
+    window.renderOrders = function() {
+      const container = document.getElementById('ordersList');
+      const filtered = currentFilter === 'all'
+        ? ordersData
+        : ordersData.filter(o => o.status === currentFilter);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <h3>Замовлень немає</h3>
+            <p>Нові замовлення з'являться тут автоматично</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(order => {
+        const date = order.createdAt?.toDate ? order.createdAt.toDate() : order.createdAt;
+        const formattedDate = date instanceof Date ? date.toLocaleString('uk-UA') : 'Щойно';
+
+        const statusMap = {
+          new: { label: 'Нове', class: 'status-new' },
+          processing: { label: 'В обробці', class: 'status-processing' },
+          completed: { label: 'Виконано', class: 'status-completed' },
+          cancelled: { label: 'Скасовано', class: 'status-cancelled' }
+        };
+
+        const status = statusMap[order.status] || statusMap.new;
+
+        return `
+          <div class="order-card">
+            <div class="order-header">
+              <div>
+                <div class="order-number">${order.orderNumber}</div>
+                <div class="order-date">${formattedDate}</div>
+              </div>
+              <span class="status-badge ${status.class}">${status.label}</span>
+            </div>
+
+            <div class="order-customer">
+              <div class="customer-field">
+                <span class="customer-label">Клієнт</span>
+                <span class="customer-value">${order.customer.name} ${order.customer.surname}</span>
+              </div>
+              <div class="customer-field">
+                <span class="customer-label">Телефон</span>
+                <span class="customer-value">${order.customer.phone}</span>
+              </div>
+              <div class="customer-field">
+                <span class="customer-label">Email</span>
+                <span class="customer-value">${order.customer.email || '—'}</span>
+              </div>
+              <div class="customer-field">
+                <span class="customer-label">Місто</span>
+                <span class="customer-value">${order.delivery.city}</span>
+              </div>
+              <div class="customer-field">
+                <span class="customer-label">Адреса доставки</span>
+                <span class="customer-value">${order.delivery.address}</span>
+              </div>
+              <div class="customer-field">
+                <span class="customer-label">Коментар</span>
+                <span class="customer-value">${order.comment || '—'}</span>
+              </div>
+            </div>
+
+            <div class="order-items">
+              ${order.items.map(item => `
+                <div class="order-item">
+                  <span class="item-name">${item.emoji || '⚡'} ${item.brand} — ${item.name}</span>
+                  <span class="item-qty">×${item.quantity}</span>
+                  <span class="item-price">${(item.price * item.quantity).toLocaleString('uk-UA')} ₴</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="order-total">
+              <span>Загальна сума:</span>
+              <span class="price">${order.total.toLocaleString('uk-UA')} ₴</span>
+            </div>
+
+            <div class="order-actions">
+              ${order.status === 'new' ? `
+                <button class="btn-sm btn-warning" onclick="updateOrderStatus('${order.id}', 'processing')">
+                  В обробку
+                </button>
+              ` : ''}
+              ${order.status === 'processing' ? `
+                <button class="btn-sm btn-success" onclick="updateOrderStatus('${order.id}', 'completed')">
+                  Виконано
+                </button>
+              ` : ''}
+              ${order.status !== 'cancelled' && order.status !== 'completed' ? `
+                <button class="btn-sm btn-danger" onclick="updateOrderStatus('${order.id}', 'cancelled')">
+                  Скасувати
+                </button>
+              ` : ''}
+            </div>
+          </div>`;
+      }).join('');
+    };
+
+    // Update Order Status
+    window.updateOrderStatus = async function(orderId, newStatus) {
+      if (db) {
+        await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
+      } else {
+        // Demo mode
+        const order = ordersData.find(o => o.id === orderId);
+        if (order) {
+          order.status = newStatus;
+          renderOrders();
+          updateStats();
+        }
+      }
+    };
+
+    // Filter Orders
+    window.filterOrders = function(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderOrders();
+    };
+
+    // Update Stats
+    function updateStats() {
+      const stats = {
+        new: ordersData.filter(o => o.status === 'new').length,
+        processing: ordersData.filter(o => o.status === 'processing').length,
+        completed: ordersData.filter(o => o.status === 'completed').length,
+        total: ordersData.length
+      };
+
+      document.getElementById('statNew').textContent = stats.new;
+      document.getElementById('statProcessing').textContent = stats.processing;
+      document.getElementById('statCompleted').textContent = stats.completed;
+      document.getElementById('statTotal').textContent = stats.total;
+    }
+  </script>
+</body>
+</html>

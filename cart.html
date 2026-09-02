@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кошик замовлення — КОМПУТЕРРА</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-alt: #f0f4f8;
+      --text: #1a2332;
+      --text-secondary: #5a6a7e;
+      --text-muted: #8896a6;
+      --border: #e2e8f0;
+      --border-light: #edf2f7;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-light: #fef3c7;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+      --success: #10b981;
+      --error: #ef4444;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img { height: 48px; border-radius: 8px; }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-link:hover { color: var(--text); background: var(--surface-alt); }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .cart-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .cart-items {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .cart-item {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cart-item:last-child { border-bottom: none; }
+
+    .item-image {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #fef9ee 0%, #fef3c7 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-brand {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .item-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .item-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .item-qty {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      color: var(--text-secondary);
+    }
+
+    .qty-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .qty-value {
+      font-size: 15px;
+      font-weight: 600;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .item-remove {
+      background: none;
+      border: none;
+      color: var(--error);
+      cursor: pointer;
+      font-size: 20px;
+      padding: 8px;
+      transition: var(--transition);
+      opacity: 0.6;
+    }
+
+    .item-remove:hover { opacity: 1; transform: scale(1.1); }
+
+    .empty-cart {
+      padding: 80px 40px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-cart-icon { font-size: 64px; margin-bottom: 16px; opacity: 0.3; }
+
+    .order-summary {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      padding: 24px;
+      position: sticky;
+      top: 92px;
+    }
+
+    .summary-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .summary-row:last-of-type { border-bottom: 2px solid var(--border); }
+
+    .summary-label { font-size: 14px; color: var(--text-secondary); }
+    .summary-value { font-size: 14px; font-weight: 600; }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0 0;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .summary-total .summary-value { color: var(--accent); }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .checkout-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      padding: 32px;
+      margin-top: 32px;
+      display: none;
+    }
+
+    .checkout-form.active { display: block; }
+
+    .form-section {
+      margin-bottom: 32px;
+    }
+
+    .form-section:last-child { margin-bottom: 0; }
+
+    .form-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .form-input, .form-textarea {
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xs);
+      font-size: 14px;
+      font-family: inherit;
+      transition: var(--transition);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: white;
+      flex: 1;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--surface-alt);
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border-light);
+      color: var(--text);
+    }
+
+    /* Success Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .modal-text {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cart-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-summary {
+        position: static;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .item-image {
+        width: 100%;
+        height: 120px;
+      }
+      h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpg" alt="КОМПУТЕРРА">
+      </a>
+      <a href="index.html" class="back-link">
+        ← Повернутися до каталогу
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="container">
+    <h1>🛒 Кошик замовлення</h1>
+
+    <div class="cart-grid">
+      <!-- Cart Items -->
+      <div id="cartItemsContainer">
+        <div class="cart-items" id="cartItems">
+          <!-- Items will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <div class="summary-title">Підсумок замовлення</div>
+        <div class="summary-row">
+          <span class="summary-label">Товарів:</span>
+          <span class="summary-value" id="itemsCount">0</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Сума:</span>
+          <span class="summary-value" id="subtotal">0 ₴</span>
+        </div>
+        <div class="summary-total">
+          <span>Разом:</span>
+          <span class="summary-value" id="total">0 ₴</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn" onclick="showCheckoutForm()">
+          Оформити замовлення
+        </button>
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="checkout-form" id="checkoutForm">
+      <div class="form-section">
+        <div class="form-section-title">Контактна інформація</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Ім'я *</label>
+            <input type="text" class="form-input" id="customerName" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Прізвище *</label>
+            <input type="text" class="form-input" id="customerSurname" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Телефон *</label>
+            <input type="tel" class="form-input" id="customerPhone" placeholder="+380" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="customerEmail">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Адреса доставки</div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Місто *</label>
+            <input type="text" class="form-input" id="city" required>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Відділення Нової Пошти / Адреса *</label>
+            <input type="text" class="form-input" id="address" required>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Коментар до замовлення</label>
+            <textarea class="form-textarea" id="comment" placeholder="Додаткові побажання..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="hideCheckoutForm()">Скасувати</button>
+        <button class="btn btn-primary" onclick="submitOrder()">Підтвердити замовлення</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <div class="modal-icon">✅</div>
+      <div class="modal-title">Замовлення прийнято!</div>
+      <div class="modal-text">
+        Ваше замовлення №<span id="orderNumber"></span> успішно оформлено.<br>
+        Наш менеджер зв'яжеться з вами найближчим часом.
+      </div>
+      <button class="btn btn-primary" onclick="window.location.href='index.html'">
+        Повернутися до каталогу
+      </button>
+    </div>
+  </div>
+
+  <script type="module">
+    // Firebase configuration will be added here
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // Firebase config (will be replaced with actual config)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    let app, db;
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      window.firebaseDb = db;
+    } catch (error) {
+      console.log('Firebase not configured yet');
+    }
+
+    // Cart functions
+    window.cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    window.renderCart = function() {
+      const container = document.getElementById('cartItems');
+      const itemsCount = document.getElementById('itemsCount');
+      const subtotal = document.getElementById('subtotal');
+      const total = document.getElementById('total');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <h3>Кошик порожній</h3>
+            <p>Додайте товари з каталогу</p>
+          </div>`;
+        itemsCount.textContent = '0';
+        subtotal.textContent = '0 ₴';
+        total.textContent = '0 ₴';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      let totalAmount = 0;
+      container.innerHTML = cart.map((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        totalAmount += itemTotal;
+        return `
+          <div class="cart-item">
+            <div class="item-image">${item.emoji || '⚡'}</div>
+            <div class="item-info">
+              <div class="item-brand">${item.brand}</div>
+              <div class="item-name">${item.name}</div>
+              <div class="item-price">${item.price.toLocaleString('uk-UA')} ₴</div>
+            </div>
+            <div class="item-qty">
+              <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+              <span class="qty-value">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+            <button class="item-remove" onclick="removeItem(${index})" title="Видалити">🗑️</button>
+          </div>`;
+      }).join('');
+
+      itemsCount.textContent = cart.length;
+      subtotal.textContent = totalAmount.toLocaleString('uk-UA') + ' ₴';
+      total.textContent = totalAmount.toLocaleString('uk-UA') + ' ₴';
+      checkoutBtn.disabled = false;
+    };
+
+    window.updateQuantity = function(index, change) {
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    };
+
+    window.removeItem = function(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    };
+
+    window.showCheckoutForm = function() {
+      document.getElementById('checkoutForm').classList.add('active');
+      document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.hideCheckoutForm = function() {
+      document.getElementById('checkoutForm').classList.remove('active');
+    };
+
+    window.submitOrder = async function() {
+      const name = document.getElementById('customerName').value.trim();
+      const surname = document.getElementById('customerSurname').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const email = document.getElementById('customerEmail').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const comment = document.getElementById('comment').value.trim();
+
+      if (!name || !surname || !phone || !city || !address) {
+        alert('Будь ласка, заповніть всі обов\'язкові поля');
+        return;
+      }
+
+      const orderData = {
+        orderNumber: 'ORD-' + Date.now(),
+        customer: { name, surname, phone, email },
+        delivery: { city, address },
+        comment,
+        items: cart,
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        status: 'new',
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        if (window.firebaseDb) {
+          await addDoc(collection(window.firebaseDb, 'orders'), orderData);
+        }
+
+        document.getElementById('orderNumber').textContent = orderData.orderNumber;
+        document.getElementById('successModal').classList.add('active');
+        localStorage.removeItem('cart');
+        cart = [];
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Замовлення оформлено (локально). Firebase не налаштовано.');
+        localStorage.removeItem('cart');
+        window.location.href = 'index.html';
+      }
+    };
+
+    // Init
+    renderCart();
+  </script>
+</body>
+</html>
