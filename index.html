@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SolarTech — Каталог сонячного обладнання</title>
+  <title>КОМПУТЕРРА — Каталог сонячного обладнання</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -804,20 +804,26 @@
     @media (max-width: 1024px) {
       .advantages-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
     }
 
     @media (max-width: 768px) {
       .categories-grid { grid-template-columns: 1fr; }
       .products-grid { grid-template-columns: 1fr; }
-      .hero { padding: 60px 24px 80px; }
-      .hero-stats { gap: 32px; }
+      .hero { padding: 50px 20px 70px; }
+      .hero h1 { font-size: clamp(28px, 8vw, 42px); }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .hero-stat-value { font-size: 28px; }
+      .hero-stat-label { font-size: 12px; }
       .toolbar { flex-direction: column; align-items: stretch; }
       .toolbar-left { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-      .toolbar-right { justify-content: space-between; }
+      .toolbar-right { justify-content: space-between; flex-wrap: wrap; gap: 12px; }
       .search-box input, .search-box input:focus { width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 24px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       .advantages-grid { grid-template-columns: 1fr; }
+      .category-card { padding: 20px 18px; }
+      .category-icon { width: 44px; height: 44px; font-size: 20px; }
 
       nav { display: none; }
       .mobile-toggle { display: block; }
@@ -833,6 +839,32 @@
         padding: 16px 24px;
         box-shadow: var(--shadow-lg);
       }
+
+      .header-inner { padding: 0 16px; }
+      .logo img { height: 40px !important; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px 60px; }
+      .hero h1 { font-size: 26px; line-height: 1.2; }
+      .hero p { font-size: 15px; }
+      .hero-badge { font-size: 11px; padding: 5px 12px; }
+      .hero-stats { gap: 20px; }
+      .hero-stat-value { font-size: 24px; }
+      .categories-bar { margin-top: -30px; padding: 0 16px; }
+      .products-section { padding: 0 16px 60px; }
+      .advantages { padding: 60px 16px; }
+      .section-header h2 { font-size: 26px; }
+      .product-card { margin-bottom: 16px; }
+      .product-name { font-size: 15px; }
+      .product-specs { grid-template-columns: 1fr; }
+      .filter-btn { font-size: 12px; padding: 7px 14px; }
+      .sort-select { font-size: 12px; }
+      .toolbar { margin-top: 32px; }
+    }
+
+    @media (min-width: 1400px) {
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
     }
 
     /* animation */
@@ -852,8 +884,7 @@
   <header>
     <div class="header-inner">
       <a href="#" class="logo">
-        <div class="logo-icon">☀️</div>
-        <div class="logo-text">Solar<span>Tech</span></div>
+        <img src="images/logo.jpg" alt="КОМПУТЕРРА" style="height: 48px; border-radius: 8px;">
       </a>
       <button class="mobile-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
       <nav>
@@ -985,7 +1016,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo-text">Solar<span style="color:#f59e0b">Tech</span></div>
+          <img src="images/logo.jpg" alt="КОМПУТЕРРА" style="height: 40px; border-radius: 6px; margin-bottom: 12px;">
           <p>Комплексні рішення в галузі сонячної енергетики для дому, бізнесу та промисловості.</p>
         </div>
         <div class="footer-col">
@@ -1009,7 +1040,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2024 SolarTech. Всі права захищені.</span>
+        <span>© 2024 КОМПУТЕРРА. Всі права захищені.</span>
         <span>Політика конфіденційності</span>
       </div>
     </div>

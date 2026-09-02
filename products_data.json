@@ -1,0 +1,549 @@
+[
+  {
+    "id": 1,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "LuxPower",
+    "name": "Інвертор гібридний LuxPower SNA6000 Wide PV (6 кВт, 1 фаза)",
+    "price": 26000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "6000 W",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_1.jpg"
+  },
+  {
+    "id": 2,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "LuxPower",
+    "name": "Інвертор гібридний LuxPower SNA PRO-EU 6.5K (6,5 кВт, 1 фаза)",
+    "price": 34000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "6,5 кВт",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_2.jpg"
+  },
+  {
+    "id": 3,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "LuxPower",
+    "name": "Інвертор гібридний LuxPower SNA2-EU-LT 14K (14 кВт, 1 фаза)",
+    "price": 59000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "14 кВт",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_3.jpg"
+  },
+  {
+    "id": 4,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Інвертор автономний однофазний Solis S6 5кВт, 1xMPPT, для LV Batteries (S6-EO1P5K-48-EU)",
+    "price": 29500,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5 кВт",
+      "phases": "1 фаза",
+      "mppt": "1x MPPT"
+    },
+    "image": "images/item_4.jpg"
+  },
+  {
+    "id": 5,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор однофазний Solis S6 6кВт, 2xMPPT, DC, для LV Batteries (S6-EH1P6K-L-PLUS)",
+    "price": 41000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "6 кВт",
+      "phases": "1 фаза",
+      "mppt": "2x MPPT"
+    },
+    "image": "images/item_5.jpg"
+  },
+  {
+    "id": 6,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор однофазний Solis S6 8кВт, 2xMPPT, DC, для LV Batteries (S6-EH1P8K-L-PLUS)",
+    "price": 56000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "8 кВт",
+      "phases": "1 фаза",
+      "mppt": "2x MPPT"
+    },
+    "image": "images/item_6.jpg"
+  },
+  {
+    "id": 7,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-6K-SG05LP1-AM2-PLUS (6 кВт, 1 фаза, 2 МРРТ, LV)",
+    "price": 43000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "6 кВт",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_7.jpg"
+  },
+  {
+    "id": 8,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-8K-SG05LP1-EU-AM2-PLUS (8 кВт, 1 фаза, 2 МРРТ, LV)",
+    "price": 59000,
+    "status": "preorder",
+    "statusLabel": "Очікується 28.08.2026",
+    "statusBadgeClass": "badge-preorder",
+    "specs": {
+      "power": "8 кВт",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_8.jpg"
+  },
+  {
+    "id": 9,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-12K-SG02LP1-EU-AM3-PLUS (12 кВт, 1 фаза, 3 МРРТ, LV)",
+    "price": 79000,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "12 кВт",
+      "phases": "1 фаза"
+    },
+    "image": "images/item_9.jpg"
+  },
+  {
+    "id": 10,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 12кВт, 2xMPPT, DC, для LV Batteries (S6-EH3P12K02-NV-YD-L)",
+    "price": 0,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "12 кВт",
+      "phases": "3 фази",
+      "mppt": "2x MPPT"
+    },
+    "image": "images/item_10.jpg"
+  },
+  {
+    "id": 11,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 15кВт, 2xMPPT, DC, для LV Batteries (S6-EH3P15K02-NV-YD-L)",
+    "price": 98000,
+    "status": "preorder",
+    "statusLabel": "Очікується 30.09.2026",
+    "statusBadgeClass": "badge-preorder",
+    "specs": {
+      "power": "15 кВт",
+      "phases": "3 фази",
+      "mppt": "2x MPPT"
+    },
+    "image": "images/item_11.jpg"
+  },
+  {
+    "id": 12,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 15кВт, 2xMPPT, DC, для HV Batteries (S6-EH3P15K-H)",
+    "price": 75000,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "15 кВт",
+      "phases": "3 фази",
+      "mppt": "2x MPPT"
+    },
+    "image": "images/item_12.jpg"
+  },
+  {
+    "id": 13,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 20кВт, 4xMPPT, DC, для HV Batteries (S6-EH3P20K-H)",
+    "price": 86000,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "20 кВт",
+      "phases": "3 фази",
+      "mppt": "4x MPPT"
+    },
+    "image": "images/item_13.jpg"
+  },
+  {
+    "id": 14,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-12K-SG05LP3-EU-SM2 (12 кВт, 3 фази, 2 МРРТ, LV)",
+    "price": 0,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "12 кВт",
+      "phases": "3 фази"
+    },
+    "image": "images/item_14.jpg"
+  },
+  {
+    "id": 15,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-15K-SG05LP3-EU-SM2 (15 кВт, 3 фази, 2 МРРТ, LV)",
+    "price": 0,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "15 кВт",
+      "phases": "3 фази"
+    },
+    "image": "images/item_15.jpg"
+  },
+  {
+    "id": 16,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-16K-SG01LP1-EU (16 кВт, 3 фази, 2 МРРТ, LV)",
+    "price": 0,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "16 кВт",
+      "phases": "3 фази"
+    },
+    "image": "images/item_16.jpg"
+  },
+  {
+    "id": 17,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Deye",
+    "name": "Інвертор гібридний Deye SUN-20K-SG05LP3-EU-SM2 (20 кВт, 3 фази, 2 МРРТ, LV)",
+    "price": 129000,
+    "status": "preorder",
+    "statusLabel": "Очікується 30.08.2026",
+    "statusBadgeClass": "badge-preorder",
+    "specs": {
+      "power": "20 кВт",
+      "phases": "3 фази"
+    },
+    "image": "images/item_17.jpg"
+  },
+  {
+    "id": 18,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "2E",
+    "name": "АКБ 2E LFP48100 48V/100Ah 19\" LCD 16S (2E-LFP48100-LCD)",
+    "price": 35900,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "voltage": "48 В"
+    },
+    "image": "images/item_18.jpg"
+  },
+  {
+    "id": 19,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "BYD",
+    "name": "АКБ 5.12кВт, BYD BatteryBox LV5.0+, LiFePO4 (BATTERY-BOX LV5.0+)",
+    "price": 41000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5.12 кВт",
+      "type": "LiFePO4"
+    },
+    "image": "https://en.byd.com/wp-content/uploads/2023/08/1.-BYD-YUAN-PLUS-003-1920x1067.jpg"
+  },
+  {
+    "id": 20,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Leapton",
+    "name": "АКБ Leapton EL-A05 51.2В, 100А•год, LiFePO4 16S1P",
+    "price": 38000,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "phases": "1 фаза",
+      "type": "LiFePO4",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_20.jpg"
+  },
+  {
+    "id": 21,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "АКБ Dyness DL5.0C (5,12кВт*год /51.2В)",
+    "price": 39900,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5,12 кВт*год",
+      "voltage": "51.2 В"
+    },
+    "image": "https://png.pngtree.com/png-clipart/20250422/original/pngtree-icon-of-network-and-connection-people-vector-png-image_20768690.png"
+  },
+  {
+    "id": 22,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "АКБ Dyness DL5.0C Pro (5,12 кВт * год / 51,2 В)",
+    "price": 40900,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "5,12 кВт",
+      "voltage": "51.2 В"
+    },
+    "image": "https://www.unishoes.it/imgProd/stock/adidas-samba-total-glitter-black-silver_1.jpg?v44"
+  },
+  {
+    "id": 23,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "АКБ Dyness PowerHaus (5,12кВт*год /51,2 В)",
+    "price": 44900,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5,12 кВт*год",
+      "voltage": "51.2 В"
+    },
+    "image": "https://www.allemann-gmbh.de/files/allemann/upload/news/2022/11 - 2022/GaragentorFenser.jpg"
+  },
+  {
+    "id": 24,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "АКБ Dyness Powerbrick Plus (16,07 кВт*год / 51,2 В LV)",
+    "price": 104000,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "16,07 кВт*год",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_24.jpg"
+  },
+  {
+    "id": 25,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Deye",
+    "name": "АКБ Deye LV SE-F5 Pro-С (5,12 кВт·год/51,2 В)",
+    "price": 39900,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5,12 кВт·год",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_25.jpg"
+  },
+  {
+    "id": 26,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Deye",
+    "name": "АКБ Deye LV SE-F16-C (16 кВт·год/51,2 В)",
+    "price": 96500,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "16 кВт·год",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_26.jpg"
+  },
+  {
+    "id": 27,
+    "category": "bms",
+    "catName": "Системи керування",
+    "brand": "Dyness",
+    "name": "Система керування Dyness Stack100 SBDU100 (від 3 до 15 акб)",
+    "price": 40500,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {},
+    "image": "images/item_27.jpg"
+  },
+  {
+    "id": 28,
+    "category": "bms",
+    "catName": "Системи керування",
+    "brand": "Dyness",
+    "name": "Система керування Dyness SBDU200 (для Stack280, Stack314, від 3 до 15 акб)",
+    "price": 65300,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {},
+    "image": "images/item_28.jpg"
+  },
+  {
+    "id": 29,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "Акумуляторна батарея Dyness Stack100 S51100 Heat (5,12 кВт * год / 51,2 В HV)",
+    "price": 42500,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "5,12 кВт",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_29.jpg"
+  },
+  {
+    "id": 30,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "Акумуляторна батарея Dyness Stack280 S51280 (14,33 кВт * год / 51,2 В HV)",
+    "price": 85500,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "14,33 кВт",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_30.jpg"
+  },
+  {
+    "id": 31,
+    "category": "battery",
+    "catName": "Акумулятори",
+    "brand": "Dyness",
+    "name": "Акумуляторна батарея Dyness Stack314 S51314 (16,07 кВт * год / 51,2 В HV)",
+    "price": 97000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "16,07 кВт",
+      "voltage": "51.2 В"
+    },
+    "image": "images/item_31.jpg"
+  },
+  {
+    "id": 32,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 30кВт, 3xMPPT, DC, для HV Batteries (S6-EH3P30K-H)",
+    "price": 135000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "30 кВт",
+      "phases": "3 фази",
+      "mppt": "3x MPPT"
+    },
+    "image": "images/item_32.jpg"
+  },
+  {
+    "id": 33,
+    "category": "inverter",
+    "catName": "Інвертори",
+    "brand": "Solis",
+    "name": "Гібридний інвертор трифазний Solis S6 50кВт, 4xMPPT, DC, для HV Batteries (S6-EH3P50K-H)",
+    "price": 207000,
+    "status": "in_stock",
+    "statusLabel": "В наявності",
+    "statusBadgeClass": "badge-in-stock",
+    "specs": {
+      "power": "50 кВт",
+      "phases": "3 фази",
+      "mppt": "4x MPPT"
+    },
+    "image": "images/item_33.jpg"
+  },
+  {
+    "id": 34,
+    "category": "solar",
+    "catName": "Сонячні панелі",
+    "brand": "JA Solar",
+    "name": "Фотоелектрична панель JA Solar JAM72D40-610/LB 610W, Bifacial N-type",
+    "price": 5250,
+    "status": "out_of_stock",
+    "statusLabel": "Під замовлення",
+    "statusBadgeClass": "badge-out-stock",
+    "specs": {
+      "power": "610 W",
+      "type": "Bifacial N-type"
+    },
+    "image": "images/item_34.jpg"
+  }
+]
