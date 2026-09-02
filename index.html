@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarTech — Каталог сонячного обладнання</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       CSS RESET & VARIABLES
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-alt: #f0f4f8;
+      --text: #1a2332;
+      --text-secondary: #5a6a7e;
+      --text-muted: #8896a6;
+      --border: #e2e8f0;
+      --border-light: #edf2f7;
+
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-light: #fef3c7;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+
+      --solar: #f59e0b;
+      --inverter: #3b82f6;
+      --battery: #10b981;
+
+      --solar-light: #fef9ee;
+      --inverter-light: #eff6ff;
+      --battery-light: #ecfdf5;
+
+      --solar-border: #fcd34d;
+      --inverter-border: #93c5fd;
+      --battery-border: #6ee7b7;
+
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-hover: 0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    nav { display: flex; gap: 8px; align-items: center; }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      transition: var(--transition);
+    }
+
+    nav a:hover { color: var(--text); background: var(--surface-alt); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, #f59e0b, #f97316) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    }
+
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4) !important; }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--text);
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, #1a2332 0%, #0f172a 100%);
+      padding: 100px 24px 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.25);
+      color: #fbbf24;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════
+       CATEGORIES NAV
+    ═══════════════════════════════════════════ */
+    .categories-bar {
+      max-width: 1320px;
+      margin: -40px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .category-card.active-solar { border-color: var(--solar-border); background: var(--solar-light); }
+    .category-card.active-inverter { border-color: var(--inverter-border); background: var(--inverter-light); }
+    .category-card.active-battery { border-color: var(--battery-border); background: var(--battery-light); }
+
+    .category-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .category-icon.solar { background: var(--solar-light); color: var(--solar); }
+    .category-icon.inverter { background: var(--inverter-light); color: var(--inverter); }
+    .category-icon.battery { background: var(--battery-light); color: var(--battery); }
+
+    .category-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .category-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════
+       FILTER & SORT BAR
+    ═══════════════════════════════════════════ */
+    .toolbar {
+      max-width: 1320px;
+      margin: 40px auto 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+    .filter-btn.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 9px 16px 9px 40px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      background: var(--surface);
+      font-size: 13px;
+      font-family: inherit;
+      width: 240px;
+      transition: var(--transition);
+      color: var(--text);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      width: 300px;
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sort-select {
+      padding: 9px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text-secondary);
+      cursor: pointer;
+      appearance: none;
+      padding-right: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6a7e' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    .results-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════
+       PRODUCTS GRID
+    ═══════════════════════════════════════════ */
+    .products-section {
+      max-width: 1320px;
+      margin: 28px auto 0;
+      padding: 0 24px 80px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border);
+    }
+
+    .product-image {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+    }
+
+    .product-image.solar-bg {
+      background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+    }
+
+    .product-image.inverter-bg {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    }
+
+    .product-image.battery-bg {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .badge-hit {
+      background: #ef4444;
+      color: white;
+    }
+
+    .badge-new {
+      background: var(--inverter);
+      color: white;
+    }
+
+    .badge-eco {
+      background: var(--battery);
+      color: white;
+    }
+
+    .product-body {
+      padding: 20px 22px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-brand {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .product-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .spec-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .spec-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .product-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .product-price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-old {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .price-current {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .price-current .currency {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .btn-cart {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--text);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-cart:hover {
+      background: #2d3a4d;
+      transform: translateY(-1px);
+    }
+
+    .btn-cart:active { transform: scale(0.97); }
+
+    /* ═══════════════════════════════════════════
+       ADVANTAGES
+    ═══════════════════════════════════════════ */
+    .advantages {
+      background: var(--surface);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 80px 24px;
+    }
+
+    .advantages-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .advantage-card {
+      text-align: center;
+      padding: 32px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    .advantage-card:hover {
+      border-color: var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .advantage-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      background: var(--accent-light);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .advantage-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .advantage-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: #0f172a;
+      color: rgba(255,255,255,0.6);
+      padding: 60px 24px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo-text {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 4px 0;
+      transition: var(--transition);
+    }
+
+    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    /* ═══════════════════════════════════════════
+       TOAST / NOTIFICATION
+    ═══════════════════════════════════════════ */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #1a2332;
+      color: white;
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       NO RESULTS
+    ═══════════════════════════════════════════ */
+    .no-results {
+      text-align: center;
+      padding: 80px 20px;
+      grid-column: 1 / -1;
+    }
+
+    .no-results-icon { font-size: 48px; margin-bottom: 16px; }
+    .no-results h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .no-results p { color: var(--text-secondary); font-size: 15px; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .advantages-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .hero { padding: 60px 24px 80px; }
+      .hero-stats { gap: 32px; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar-left { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .toolbar-right { justify-content: space-between; }
+      .search-box input, .search-box input:focus { width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .advantages-grid { grid-template-columns: 1fr; }
+
+      nav { display: none; }
+      .mobile-toggle { display: block; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        box-shadow: var(--shadow-lg);
+      }
+    }
+
+    /* animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-card {
+      animation: fadeUp 0.4s ease both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">☀️</div>
+        <div class="logo-text">Solar<span>Tech</span></div>
+      </a>
+      <button class="mobile-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav>
+        <a href="#catalog">Каталог</a>
+        <a href="#advantages">Про нас</a>
+        <a href="#contacts">Контакти</a>
+        <a href="tel:+380800123456" class="nav-cta">📞 0 800 123-456</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🌞 Лідер ринку з 2015 року</div>
+      <h1>Енергія сонця —<br><span>для вашого дому</span></h1>
+      <p>Сонячні панелі, інвертори та акумулятори від провідних світових виробників. Безкоштовний розрахунок системи за 24 години.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">1 200+</div>
+          <div class="hero-stat-label">Товарів у наявності</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">50+</div>
+          <div class="hero-stat-label">Брендів</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">5 років</div>
+          <div class="hero-stat-label">Гарантія</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">24г</div>
+          <div class="hero-stat-label">Доставка по Україні</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <div class="categories-bar" id="catalog">
+    <div class="categories-grid">
+      <div class="category-card active-solar" data-category="solar" onclick="filterCategory('solar')">
+        <div class="category-icon solar">☀️</div>
+        <div class="category-info">
+          <h3>Сонячні панелі</h3>
+          <p>Монокристал, полікристал, гнучкі</p>
+        </div>
+      </div>
+      <div class="category-card" data-category="inverter" onclick="filterCategory('inverter')">
+        <div class="category-icon inverter">⚡</div>
+        <div class="category-info">
+          <h3>Інвертори</h3>
+          <p>Мережеві, гібридні, автономні</p>
+        </div>
+      </div>
+      <div class="category-card" data-category="battery" onclick="filterCategory('battery')">
+        <div class="category-icon battery">🔋</div>
+        <div class="category-info">
+          <h3>Акумулятори</h3>
+          <p>LiFePO4, Li-ion, гелеві</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button class="filter-btn active" onclick="filterCategory('all')">Всі</button>
+      <button class="filter-btn" onclick="filterBrand('JA Solar')">JA Solar</button>
+      <button class="filter-btn" onclick="filterBrand('Longi')">Longi</button>
+      <button class="filter-btn" onclick="filterBrand('Huawei')">Huawei</button>
+      <button class="filter-btn" onclick="filterBrand('Growatt')">Growatt</button>
+      <button class="filter-btn" onclick="filterBrand('CATL')">CATL</button>
+      <div class="search-box">
+        <input type="text" placeholder="Пошук обладнання..." id="searchInput" oninput="searchProducts()">
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+        <option value="default">Сортування</option>
+        <option value="price-asc">Ціна: за зростанням</option>
+        <option value="price-desc">Ціна: за спаданням</option>
+        <option value="power-desc">Потужність: за спаданням</option>
+      </select>
+      <span class="results-count" id="resultsCount"></span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products-section">
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section class="advantages" id="advantages">
+    <div class="advantages-inner">
+      <div class="section-header">
+        <h2>Чому обирають нас</h2>
+        <p>Понад 8 років допомагаємо переходити на чисту енергію по всій Україні</p>
+      </div>
+      <div class="advantages-grid">
+        <div class="advantage-card">
+          <div class="advantage-icon">🏆</div>
+          <h3>Оригінальна продукція</h3>
+          <p>Лише сертифіковане обладнання напряму від виробників Tier 1</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">🚚</div>
+          <h3>Швидка доставка</h3>
+          <p>Відправка в день замовлення. Доставка по всій Україні від 1 дня</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">🔧</div>
+          <h3>Повний розрахунок</h3>
+          <p>Безкоштовний підбір комплектації та проєктування сонячної системи</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">🛡️</div>
+          <h3>Гарантія 5 років</h3>
+          <p>Офіційна гарантія та сервісне обслуговування по всій країні</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacts">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">Solar<span style="color:#f59e0b">Tech</span></div>
+          <p>Комплексні рішення в галузі сонячної енергетики для дому, бізнесу та промисловості.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Каталог</h4>
+          <a href="#" onclick="filterCategory('solar')">Сонячні панелі</a>
+          <a href="#" onclick="filterCategory('inverter')">Інвертори</a>
+          <a href="#" onclick="filterCategory('battery')">Акумулятори</a>
+        </div>
+        <div class="footer-col">
+          <h4>Компанія</h4>
+          <a href="#">Про нас</a>
+          <a href="#">Доставка та оплата</a>
+          <a href="#">Гарантія</a>
+          <a href="#">Блог</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контакти</h4>
+          <a href="tel:+380800123456">0 800 123-456</a>
+          <a href="mailto:info@solartech.ua">info@solartech.ua</a>
+          <a href="#">Київ, вул. Сонячна, 42</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 SolarTech. Всі права захищені.</span>
+        <span>Політика конфіденційності</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">✅ Товар додано до кошика</div>
+
+  <script>
+    /* ═══════════════════════════════════════════
+       PRODUCT DATA
+    ═══════════════════════════════════════════ */
+    const products = [
+      // ── Сонячні панелі ──
+      {
+        id: 1, category: 'solar', brand: 'JA Solar',
+        name: 'JA Solar JAM72S30-550/MR',
+        specs: { power: '550 Вт', efficiency: '21.3%', type: 'Монокристал', size: '2274×1134 мм' },
+        price: 7400, oldPrice: 8400, badge: 'hit', emoji: '☀️'
+      },
+      {
+        id: 2, category: 'solar', brand: 'Longi',
+        name: 'Longi Hi-MO 6 LR5-72HTH-580M',
+        specs: { power: '580 Вт', efficiency: '22.5%', type: 'HPBC Mono', size: '2278×1134 мм' },
+        price: 9100, oldPrice: null, badge: 'new', emoji: '☀️'
+      },
+      {
+        id: 3, category: 'solar', brand: 'Trina Solar',
+        name: 'Trina Vertex S+ TSM-445NEG9R.28',
+        specs: { power: '445 Вт', efficiency: '22.2%', type: 'N-type TOPCon', size: '1762×1134 мм' },
+        price: 6500, oldPrice: 7100, badge: null, emoji: '☀️'
+      },
+      {
+        id: 4, category: 'solar', brand: 'Canadian Solar',
+        name: 'Canadian Solar HiKu7 CS7N-665TB-AG',
+        specs: { power: '665 Вт', efficiency: '21.8%', type: 'BiHiKu7 Bifacial', size: '2382×1303 мм' },
+        price: 11500, oldPrice: null, badge: null, emoji: '☀️'
+      },
+      {
+        id: 5, category: 'solar', brand: 'JA Solar',
+        name: 'JA Solar JAM54D40-435/LB',
+        specs: { power: '435 Вт', efficiency: '22.4%', type: 'N-type Bifacial', size: '1722×1134 мм' },
+        price: 6300, oldPrice: null, badge: 'eco', emoji: '☀️'
+      },
+      {
+        id: 6, category: 'solar', brand: 'Longi',
+        name: 'Longi Hi-MO X6 LR5-54HTH-440M',
+        specs: { power: '440 Вт', efficiency: '22.8%', type: 'HPBC Mono', size: '1722×1134 мм' },
+        price: 7800, oldPrice: 8800, badge: 'hit', emoji: '☀️'
+      },
+
+      // ── Інвертори ──
+      {
+        id: 7, category: 'inverter', brand: 'Huawei',
+        name: 'Huawei SUN2000-10KTL-M1',
+        specs: { power: '10 кВт', type: 'Мережевий', phases: '3 фази', mppt: '2 MPPT' },
+        price: 49500, oldPrice: 54500, badge: 'hit', emoji: '⚡'
+      },
+      {
+        id: 8, category: 'inverter', brand: 'Growatt',
+        name: 'Growatt SPH 10000TL3-BH-UP',
+        specs: { power: '10 кВт', type: 'Гібридний', phases: '3 фази', mppt: '2 MPPT' },
+        price: 69000, oldPrice: null, badge: 'new', emoji: '⚡'
+      },
+      {
+        id: 9, category: 'inverter', brand: 'Fronius',
+        name: 'Fronius Symo GEN24 10.0 Plus',
+        specs: { power: '10 кВт', type: 'Гібридний', phases: '3 фази', mppt: '2 MPPT' },
+        price: 102000, oldPrice: null, badge: null, emoji: '⚡'
+      },
+      {
+        id: 10, category: 'inverter', brand: 'Growatt',
+        name: 'Growatt MIN 6000TL-XH',
+        specs: { power: '6 кВт', type: 'Гібридний', phases: '1 фаза', mppt: '2 MPPT' },
+        price: 38000, oldPrice: 42000, badge: null, emoji: '⚡'
+      },
+      {
+        id: 11, category: 'inverter', brand: 'Huawei',
+        name: 'Huawei SUN2000-5KTL-M1',
+        specs: { power: '5 кВт', type: 'Мережевий', phases: '1 фаза', mppt: '2 MPPT' },
+        price: 29000, oldPrice: null, badge: 'eco', emoji: '⚡'
+      },
+      {
+        id: 12, category: 'inverter', brand: 'Solis',
+        name: 'Solis S6-GR1P5K',
+        specs: { power: '5 кВт', type: 'Мережевий', phases: '1 фаза', mppt: '2 MPPT' },
+        price: 21500, oldPrice: 23500, badge: null, emoji: '⚡'
+      },
+
+      // ── Акумулятори ──
+      {
+        id: 13, category: 'battery', brand: 'CATL',
+        name: 'CATL LiFePO4 51.2V 100Ah',
+        specs: { power: '5.12 кВт·год', type: 'LiFePO4', voltage: '51.2 В', cycles: '6000 циклів' },
+        price: 58000, oldPrice: 66000, badge: 'hit', emoji: '🔋'
+      },
+      {
+        id: 14, category: 'battery', brand: 'BYD',
+        name: 'BYD Battery-Box Premium HVS 10.2',
+        specs: { power: '10.2 кВт·год', type: 'LiFePO4', voltage: '409 В', cycles: '10000 циклів' },
+        price: 208000, oldPrice: null, badge: 'new', emoji: '🔋'
+      },
+      {
+        id: 15, category: 'battery', brand: 'Pylontech',
+        name: 'Pylontech US5000 4.8kWh',
+        specs: { power: '4.8 кВт·год', type: 'LiFePO4', voltage: '48 В', cycles: '6000 циклів' },
+        price: 45000, oldPrice: 51000, badge: null, emoji: '🔋'
+      },
+      {
+        id: 16, category: 'battery', brand: 'Growatt',
+        name: 'Growatt APX HV Battery 10.2 kWh',
+        specs: { power: '10.2 кВт·год', type: 'LiFePO4', voltage: '450 В', cycles: '8000 циклів' },
+        price: 154000, oldPrice: null, badge: null, emoji: '🔋'
+      },
+      {
+        id: 17, category: 'battery', brand: 'CATL',
+        name: 'CATL LiFePO4 48V 200Ah',
+        specs: { power: '9.6 кВт·год', type: 'LiFePO4', voltage: '48 В', cycles: '6000 циклів' },
+        price: 106000, oldPrice: 116000, badge: 'eco', emoji: '🔋'
+      },
+      {
+        id: 18, category: 'battery', brand: 'Pylontech',
+        name: 'Pylontech Force H2 7.1kWh',
+        specs: { power: '7.1 кВт·год', type: 'LiFePO4', voltage: '192 В', cycles: '6000 циклів' },
+        price: 79000, oldPrice: null, badge: 'new', emoji: '🔋'
+      },
+    ];
+
+    /* ═══════════════════════════════════════════
+       STATE
+    ═══════════════════════════════════════════ */
+    let currentCategory = 'all';
+    let currentBrand = '';
+    let currentSearch = '';
+
+    /* ═══════════════════════════════════════════
+       RENDER
+    ═══════════════════════════════════════════ */
+    function renderProducts(list) {
+      const grid = document.getElementById('productsGrid');
+      document.getElementById('resultsCount').textContent = `${list.length} товарів`;
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <h3>Нічого не знайдено</h3>
+            <p>Спробуйте змінити параметри пошуку</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map((p, i) => {
+        const bgClass = p.category === 'solar' ? 'solar-bg' : p.category === 'inverter' ? 'inverter-bg' : 'battery-bg';
+        const badgeHTML = p.badge
+          ? `<div class="product-badge badge-${p.badge}">${
+              p.badge === 'hit' ? '🔥 Хіт' : p.badge === 'new' ? '✨ Новинка' : '🌿 Еко'
+            }</div>` : '';
+        const oldPriceHTML = p.oldPrice
+          ? `<span class="price-old">${p.oldPrice.toLocaleString('uk-UA')} ₴</span>` : '';
+
+        const specKeys = Object.keys(p.specs);
+        const specLabels = {
+          power: 'Потужність', efficiency: 'ККД', type: 'Тип', size: 'Розмір',
+          phases: 'Фази', mppt: 'MPPT', voltage: 'Напруга', cycles: 'Ресурс'
+        };
+
+        return `
+          <div class="product-card" style="animation-delay: ${i * 0.06}s">
+            <div class="product-image ${bgClass}">
+              ${badgeHTML}
+              ${p.emoji}
+            </div>
+            <div class="product-body">
+              <div class="product-brand">${p.brand}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-specs">
+                ${specKeys.map(k => `
+                  <div class="spec-item">
+                    <span class="spec-label">${specLabels[k] || k}</span>
+                    <span class="spec-value">${p.specs[k]}</span>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  ${oldPriceHTML}
+                  <span class="price-current">${p.price.toLocaleString('uk-UA')} <span class="currency">₴</span></span>
+                </div>
+                <button class="btn-cart" onclick="addToCart('${p.name}')">
+                  🛒 До кошика
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    /* ═══════════════════════════════════════════
+       FILTERING
+    ═══════════════════════════════════════════ */
+    function getFiltered() {
+      return products.filter(p => {
+        if (currentCategory !== 'all' && p.category !== currentCategory) return false;
+        if (currentBrand && p.brand !== currentBrand) return false;
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          return p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q);
+        }
+        return true;
+      });
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      currentBrand = '';
+
+      // update category cards visuals
+      document.querySelectorAll('.category-card').forEach(el => {
+        el.className = 'category-card';
+        if (el.dataset.category === cat) {
+          el.classList.add(`active-${cat}`);
+        }
+      });
+      if (cat === 'all') {
+        document.querySelectorAll('.category-card').forEach(el => {
+          el.classList.add(`active-${el.dataset.category}`);
+        });
+      }
+
+      // update filter buttons
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (cat === 'all') {
+        document.querySelector('.filter-btn').classList.add('active');
+      }
+
+      applyAndRender();
+    }
+
+    function filterBrand(brand) {
+      currentBrand = currentBrand === brand ? '' : brand;
+      currentCategory = 'all';
+
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.textContent === brand && currentBrand) b.classList.add('active');
+        if (b.textContent === 'Всі' && !currentBrand) b.classList.add('active');
+      });
+
+      // reset category cards
+      document.querySelectorAll('.category-card').forEach(el => {
+        el.className = `category-card active-${el.dataset.category}`;
+      });
+
+      applyAndRender();
+    }
+
+    function searchProducts() {
+      currentSearch = document.getElementById('searchInput').value;
+      applyAndRender();
+    }
+
+    function sortProducts() {
+      applyAndRender();
+    }
+
+    function applyAndRender() {
+      let filtered = getFiltered();
+      const sort = document.getElementById('sortSelect').value;
+      if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      if (sort === 'power-desc') filtered.sort((a, b) => {
+        const pw = s => parseFloat(s.specs.power) || 0;
+        return pw(b) - pw(a);
+      });
+      renderProducts(filtered);
+    }
+
+    /* ═══════════════════════════════════════════
+       CART TOAST
+    ═══════════════════════════════════════════ */
+    function addToCart(name) {
+      const toast = document.getElementById('toast');
+      toast.textContent = `✅ ${name} — додано до кошика`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    /* ═══════════════════════════════════════════
+       INIT
+    ═══════════════════════════════════════════ */
+    filterCategory('all');
+  </script>
+</body>
+</html>
